@@ -11,6 +11,6 @@ namespace api_banco_virtual.Context
         }
 
         public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<Conta> Contas { get; set; }
+        public DbSet<ContaPoupanca> ContasPoupanca { get; set; }
     }
 }

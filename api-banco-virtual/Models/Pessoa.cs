@@ -1,6 +1,6 @@
 ﻿namespace api_banco_virtual.Models
 {
-    public class Pessoa
+    public abstract class Pessoa
     {
         public string? Nome { get; set; }
         public string? SobreNome { get; set; }

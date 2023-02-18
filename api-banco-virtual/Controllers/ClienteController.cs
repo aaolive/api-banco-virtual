@@ -2,6 +2,7 @@
 using api_banco_virtual.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace api_banco_virtual.Controllers
 {
@@ -22,6 +23,24 @@ namespace api_banco_virtual.Controllers
         {
             _context.Clientes.Add(cliente);
             _context.SaveChanges();
+            return Ok(cliente);
+        }
+
+        // Obtém um cliente
+        [HttpGet("ObterCliente")]
+        public IActionResult ObterCliente(int idCliente)
+        {
+            // procura o cliente e verifica se achou
+            //var cliente = _context.Clientes
+            //    .Include(c => c.ContaPoupanca)
+            //    .FirstOrDefault(c => c.Id == idCliente);
+
+            var cliente = _context.Clientes.Find(idCliente);
+            if (cliente == null)
+            {
+                return NotFound("Cliente não encontrado.");
+            }
+
             return Ok(cliente);
         }
     }

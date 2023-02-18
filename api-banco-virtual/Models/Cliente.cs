@@ -3,6 +3,7 @@
     public class Cliente : Pessoa
     {
         public int Id { get; set; }
+        //public ContaPoupanca ContaPoupanca { get; set; }
 
         public Cliente()
         {

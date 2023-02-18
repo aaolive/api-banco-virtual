@@ -1,32 +1,41 @@
 ﻿namespace api_banco_virtual.Models
 {
-    public class Conta
+    public abstract class Conta
     {
         public int Id { get; set; }
         public int ClienteId { get; set; }
         public decimal Saldo { get; set; }
 
-        public void Depositar(decimal valor)
+        public virtual void Depositar(decimal valor)
         {
             Saldo += valor;
         }
 
-        public decimal Sacar(decimal valor)
+        public virtual string Sacar(decimal valor)
         {
             if (valor > 0 && valor <= Saldo)
             {
                 Saldo -= valor;
-                return valor;
+                return $"O saque foi feito. Valor: {valor}";
             }
             else
             {
-                return 0.0m;
+                return $"Saque não realizado.";
             }
         }
 
-        public void Transferir(decimal valor, Conta contaQueRecebeDinheiro)
+        public virtual string Transferir(decimal valor, Conta contaDeDestino)
         {
-            contaQueRecebeDinheiro.Saldo += this.Sacar(valor);
+            if (valor > 0 && valor <= this.Saldo)
+            {
+                // subtrai o valor do saldo e envia a conta de destino
+                this.Saldo -= valor;
+                contaDeDestino.Saldo += valor;
+
+                return "Transferência realizada com sucesso.";
+            }
+
+            return "Transferência não foi realizada.";
         }
 
     }
